@@ -1,80 +1,79 @@
 <template>
   <div id="app">
-    <div class="">
-      <h1>Live2Learn</h1>
-      <h2>Disrupting Education System</h2>
+   <div class="container">
+      <Header />
+      <div class="row app-body">
+        <div class="col-md-6">
+          <SearchInput 
+            v-on:search-changed="searchChanged" 
+            v-on:search-submitted="searchSubmited"
+          />
+          <Loader v-if="loadingResults" />
+          <ResultList v-bind:results="results" />
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
     </div>
-    <SearchInput v-on:search-changed="searchChanged" msg="Welcome to Your Vue.js App" />
-    <p>{{ search }}</p>
-    <ResultList v-bind:results="results" />
   </div>
 </template>
 
 <script>
+import Header from './components/Header.vue'
+import Loader from './components/Loader.vue'
 import SearchInput from './components/SearchInput.vue'
 import ResultList from './components/results/ResultList.vue'
+import Users from './libraries/api.js'
 
 export default {
   name: 'app',
   components: {
+    Header,
+    Loader,
     SearchInput,
     ResultList
   },
+  
   data: function() {
     return {
       search: '',
-      results: [
-        {
-          id: 0,
-          text: "hello",
-         },
-         {
-           id: 1,
-           text: "this is a result",
-         }
-      ],
-      lastSearch: 0,
+      results: [],
+      loadingResults: false,
     };
   },
-  mounted() {
-    // Trigger the search queue handler
 
-  },
   methods: {
     searchChanged: function(search) {
       this.search = search;
-      
-      // Parse search results
-
-      // Make an ajax request to the API to get results
-
-      // Throttle the AJAX
-        // If you've made a search within the last x seconds, queue up a new search 
-      
-      // this.results = [
-      //   {
-      //     id: 0,
-      //     text: "Some other",
-      //    },
-      //    {
-      //      id: 1,
-      //      text: "Cool result",
-      //    }
-      //   ];
+    },
+    searchSubmited: function(search) {
+      const users = new Users;
+      this.loadingResults = true;
+      users.with("education", search).get(
+        (response) => {
+          this.results = JSON.parse(response);
+          this.loadingResults = false;
+        }
+      );
     },
   }
+
 }
 
 </script>
 
 <style>
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.app-body {
+  margin-top: 2em;
 }
 
 </style>
