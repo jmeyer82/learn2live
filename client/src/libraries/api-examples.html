@@ -4,16 +4,17 @@
 
 (function() {
 
+    // Direct AJAX call
     var apiCall = new Ajax;
 
     function callback(result) {
         console.log(result);
     }
 
-    // apiCall.get("profile_type", "seeker", callback);
+    apiCall.get("profile_type", "seeker", callback);
 
 
-
+    // Abstraction class
     var search = new Users;
     search.with("education", "University").get(callback);
 
