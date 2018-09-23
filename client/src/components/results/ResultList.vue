@@ -1,11 +1,13 @@
 <template>
-  <div >
-    <li
-      is="ResultItem"
-      v-for="(result) in results"
-      v-bind:key="result.id"
-      v-bind:title="result.text"
-    ></li>
+  <div class="result-list">
+    <ul class="list-group">
+      <li
+        is="ResultItem"
+        v-for="(result) in results"
+        v-bind:key="result.id"
+        v-bind:user="result"
+      ></li>
+    </ul>
   </div>
 </template>
 
@@ -28,18 +30,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+
+.result-list {
+  margin-top: 2em;
 }
+
 ul {
-  list-style-type: none;
   padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+  display: block;
 }
 </style>

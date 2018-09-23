@@ -8,7 +8,7 @@ class Ajax {
         var httpRequest = new XMLHttpRequest();
 
         if (!httpRequest) {
-        console.error('Giving up :( Cannot create an XMLHTTP instance');
+        // console.error('Giving up :( Cannot create an XMLHTTP instance');
         return false;
         }
         httpRequest.onreadystatechange = function() {
@@ -17,7 +17,7 @@ class Ajax {
                 // console.log(httpRequest.responseText);
                 callback(httpRequest.responseText);
             } else {
-                console.error('There was a problem with the request.');
+                // console.error('There was a problem with the request.');
             }
             }
         };
@@ -54,3 +54,5 @@ class Users {
 
 
 }
+
+export default Users;
