@@ -1,0 +1,22 @@
+<script src="api.js"></script>
+
+<script>
+
+(function() {
+
+    // Direct AJAX call
+    var apiCall = new Ajax;
+
+    function callback(result) {
+        console.log(result);
+    }
+
+    apiCall.get("?search_role=seeker", callback);
+
+
+    // Abstraction class
+    var search = new Users;
+    search.with("type", "seeker").with("education", "High School").get(callback);
+
+})();
+</script>
