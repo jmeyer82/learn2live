@@ -1,0 +1,21 @@
+<script src="api.js"></script>
+
+<script>
+
+(function() {
+
+    var apiCall = new Ajax;
+
+    function callback(result) {
+        console.log(result);
+    }
+
+    // apiCall.get("profile_type", "seeker", callback);
+
+
+
+    var search = new Users;
+    search.with("education", "University").get(callback);
+
+})();
+</script>
