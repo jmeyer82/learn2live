@@ -7,6 +7,8 @@
     <small >{{ user.description_roles | listify }}</small>
     <br>
     <small>{{ user.education | listify }}</small>
+    <br>
+    <small>{{ user.profile_type }}</small>
   </li>
 </template>
 

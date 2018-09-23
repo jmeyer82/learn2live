@@ -13,18 +13,19 @@
           <label for="fields">Select a field to search</label>
           <select id="fields" v-model="searchField">
             <option value="education">Education</option>
-            <option value="Sharer">Sharer</option>
+            <option value="roles">Roles</option>
+            <option value="description_roles">Description</option>
           </select>
 
           <Loader v-if="loadingResults" />
           <ResultList v-bind:results="results" v-bind:activeSearch="activeSearch" />
         </div>
-        <div class="col-md-6">
-          <img src="/assets/charts/1.png" class="" />
-          <img src="/assets/charts/2.png" class="" />
-          <img src="/assets/charts/3.png" class="" />
-          <img src="/assets/charts/4.png" class="" />
-          <img src="/assets/charts/5.png" class="" />
+        <div class="col-md-6 image-list">
+          <img src="./assets/charts/1.png" class="" />
+          <img src="./assets/charts/2.png" class="" />
+          <img src="./assets/charts/3.png" class="" />
+          <img src="./assets/charts/4.png" class="" />
+          <img src="./assets/charts/5.png" class="" />
         </div>
       </div>
     </div>
@@ -97,6 +98,10 @@ export default {
 
 .app-body {
   margin-top: 2em;
+}
+
+.image-list img {
+  max-width: 100%;
 }
 
 </style>
