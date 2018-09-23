@@ -11,12 +11,12 @@
         console.log(result);
     }
 
-    apiCall.get("profile_type", "seeker", callback);
+    apiCall.get("?search_role=seeker", callback);
 
 
     // Abstraction class
     var search = new Users;
-    search.with("education", "University").get(callback);
+    search.with("type", "seeker").with("education", "High School").get(callback);
 
 })();
 </script>

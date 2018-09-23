@@ -1,10 +1,9 @@
 class Ajax {
 
-    get(field, query, callback) {
+    get(params, callback) {
 
         var prepend = "https://cors-anywhere.herokuapp.com/"    // hack to get around CORS
         var endpoint = "https://rails5-api-mode-mirv.c9users.io/users"  // API endpoint
-        var params = "?match_target=" + query + "&by_field=" + field    // API paramters
 
         var httpRequest = new XMLHttpRequest();
 
@@ -28,24 +27,29 @@ class Ajax {
     }
 }
 
-// Users.withEducation("High School").get(callback);
+// Users.with("type", "seeker").with("education", "High School").get(callback);
 class Users {
 
     constructor() {
-        this.field = "";
-        this.query = "";
+        this.params = "?";
     }
 
     with(field, query) {
-        this.field = field;
-        this.query = query;
+        if (field = "type") {
+            this.params = this.params + "search_role=" + query + "&";
+        
+        } else {
+            this.params = this.params + "by_field=" + field + "match_target&=" + query;
+        }       
+        
         return this;
     }
 
+    
     // actually makes requests
     get(callback) {
         let apiCall = new Ajax;
-        apiCall.get(this.field, this.query, callback);
+        apiCall.get(this.params, callback);
     }
 
 
