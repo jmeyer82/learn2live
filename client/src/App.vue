@@ -9,7 +9,7 @@
             v-on:search-submitted="searchSubmited"
           />
           <Loader v-if="loadingResults" />
-          <ResultList v-bind:results="results" />
+          <ResultList v-bind:results="results" v-bind:activeSearch="activeSearch" />
         </div>
         <div class="col-md-6">
         </div>
@@ -39,6 +39,7 @@ export default {
       search: '',
       results: [],
       loadingResults: false,
+      activeSearch: false,
     };
   },
 
@@ -48,11 +49,14 @@ export default {
     },
     searchSubmited: function(search) {
       const users = new Users;
+      this.results = [];
       this.loadingResults = true;
+      this.activeSearch = false;
       users.with("education", search).get(
         (response) => {
           this.results = JSON.parse(response);
           this.loadingResults = false;
+          this.activeSearch = true;
         }
       );
     },

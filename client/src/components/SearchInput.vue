@@ -6,6 +6,7 @@
           id="search" 
           v-model="search"
           v-on:keyup="$emit('search-changed', search)"
+          placeholder="Try 'high school' or 'associates'..."
         />
         <div class="input-group-append">
           <button type="submit" class="btn btn-outline-secondary" id="button-addon2">Search</button>

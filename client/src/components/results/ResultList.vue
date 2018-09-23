@@ -7,6 +7,9 @@
         v-bind:key="result.id"
         v-bind:user="result"
       ></li>
+      <div v-if="hasResults">
+        <h3>No results</h3>
+      </div>
     </ul>
   </div>
 </template>
@@ -20,11 +23,16 @@ export default {
     ResultItem
   },
   props: {
-    results: Array
+    results: Array,
+    activeSearch: Boolean
   },
-  data: function() {
-    return {};
-  },
+  computed: {
+    // a computed getter
+    hasResults: function () {
+      // `this` points to the vm instance
+      return ! this.results.length > 0 && this.activeSearch;
+    }
+  }
 }
 </script>
 
