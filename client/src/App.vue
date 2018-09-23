@@ -1,17 +1,30 @@
 <template>
   <div id="app">
    <div class="container">
-      <Header />
+      <Header v-on:role-changed="roleChanged"  />
       <div class="row app-body">
         <div class="col-md-6">
+          Searching as a {{ currentRole }}
           <SearchInput 
             v-on:search-changed="searchChanged" 
             v-on:search-submitted="searchSubmited"
           />
+
+          <label for="fields">Select a field to search</label>
+          <select id="fields" v-model="searchField">
+            <option value="education">Education</option>
+            <option value="Sharer">Sharer</option>
+          </select>
+
           <Loader v-if="loadingResults" />
           <ResultList v-bind:results="results" v-bind:activeSearch="activeSearch" />
         </div>
         <div class="col-md-6">
+          <img src="/assets/charts/1.png" class="" />
+          <img src="/assets/charts/2.png" class="" />
+          <img src="/assets/charts/3.png" class="" />
+          <img src="/assets/charts/4.png" class="" />
+          <img src="/assets/charts/5.png" class="" />
         </div>
       </div>
     </div>
@@ -40,6 +53,8 @@ export default {
       results: [],
       loadingResults: false,
       activeSearch: false,
+      currentRole: "",
+      searchField: "",
     };
   },
 
@@ -47,14 +62,18 @@ export default {
     searchChanged: function(search) {
       this.search = search;
     },
+    roleChanged: function(role) {
+      this.currentRole = role;
+    },
     searchSubmited: function(search) {
       const users = new Users;
       this.results = [];
       this.loadingResults = true;
       this.activeSearch = false;
-      users.with("education", search).get(
+      users.with(this.searchField, search).get(
         (response) => {
-          this.results = JSON.parse(response);
+          let userData = JSON.parse(response);
+          this.results = userData.filter(person => person.profile_type != this.currentRole);
           this.loadingResults = false;
           this.activeSearch = true;
         }

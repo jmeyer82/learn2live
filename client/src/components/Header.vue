@@ -6,7 +6,13 @@
         <br>
         <small>Disrupting Education System</small>
       </span>
-      <span>Seeker</span>
+      <span>
+        <select v-model="role" v-on:change="$emit('role-changed', role)" class="custom-select">
+          <option selected>Select your role</option>
+          <option value="Seeker">Seeker</option>
+          <option value="Sharer">Sharer</option>
+        </select>
+      </span>
     </nav>
   </div>
 </template>
@@ -16,7 +22,7 @@ export default {
   name: 'Header',
   data: function() {
     return {
-      search: ''
+      role: ''
     };
   },
 }

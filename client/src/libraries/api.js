@@ -35,9 +35,8 @@ class Users {
     }
 
     with(field, query) {
-        if (field = "type") {
+        if (field == "type") {
             this.params = this.params + "search_role=" + query + "&";
-        
         } else {
             this.params = this.params + "by_field=" + field + "match_target&=" + query;
         }       
